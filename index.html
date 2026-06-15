@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>mdhub — Atlas by Meridian</title>
+<style>
+  :root {
+    --ink-900: #0E1620; --ink-700: #2A3340; --ink-500: #5A6573;
+    --ink-100: #D8DDE3; --surface-100: #FBFAF6; --surface-200: #F1EEE4;
+    --accent-700: #5C7148; --accent-900: #3A4A2E;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; background: var(--surface-100); color: var(--ink-900);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased; line-height: 1.5;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 14vh 28px 80px; }
+  .kicker {
+    font-size: 12px; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--accent-700); font-weight: 600; margin: 0 0 14px;
+  }
+  h1 { font-family: 'Source Serif 4', Georgia, serif; font-size: 40px; margin: 0 0 10px; font-weight: 600; }
+  .sub { color: var(--ink-500); font-size: 15px; margin: 0 0 40px; max-width: 52ch; }
+  .docs { display: grid; gap: 14px; }
+  a.card {
+    display: block; text-decoration: none; color: inherit;
+    background: #fff; border: 1px solid var(--ink-100); border-radius: 12px;
+    padding: 22px 24px; transition: border-color .15s ease, transform .15s ease, box-shadow .15s ease;
+  }
+  a.card:hover { border-color: var(--accent-700); transform: translateY(-1px); box-shadow: 0 6px 22px rgba(14,22,32,.07); }
+  .card .t { font-size: 18px; font-weight: 600; margin: 0 0 4px; }
+  .card .d { color: var(--ink-500); font-size: 14px; margin: 0; }
+  .card .arrow { float: right; color: var(--accent-700); font-size: 20px; line-height: 1; }
+  footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--ink-100); color: var(--ink-500); font-size: 12px; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="kicker">Atlas by Meridian</p>
+    <h1>mdhub</h1>
+    <p class="sub">Confidential briefing materials. Behavioral health corpus overview and technical data mappings.</p>
+    <div class="docs">
+      <a class="card" href="corpus-overview.html">
+        <span class="arrow">&rarr;</span>
+        <p class="t">Corpus Overview</p>
+        <p class="d">Commercial and data-dimension summary of the mdhub corpus.</p>
+      </a>
+      <a class="card" href="technical-guide.html">
+        <span class="arrow">&rarr;</span>
+        <p class="t">Technical Guide &amp; Code Mappings</p>
+        <p class="d">Function-to-tool data inventory and technical structure.</p>
+      </a>
+    </div>
+    <footer>Confidential &middot; Shared by Meridian &middot; Not for redistribution</footer>
+  </div>
+</body>
+</html>
