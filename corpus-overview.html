@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>mdhub Behavioral Health Corpus — Atlas by Meridian</title>
+<style>
+
+@page { size: A4; margin: 22mm 22mm 26mm 22mm; }
+
+:root {
+  --ink-900: #0E1620;
+  --ink-700: #2A3340;
+  --ink-500: #5A6573;
+  --ink-300: #9AA3AE;
+  --ink-100: #D8DDE3;
+  --surface-100: #FBFAF6;
+  --surface-200: #F1EEE4;
+  --accent-900: #3A4A2E;
+  --accent-700: #5C7148;
+  --accent-500: #8AA06E;
+  --font-display: 'Source Serif 4', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', Menlo, monospace;
+  --col: 165mm;
+}
+
+html, body {
+  background: var(--surface-100);
+  color: var(--ink-900);
+  font-family: var(--font-body);
+  font-size: 10.25pt;
+  line-height: 16pt;
+  -webkit-font-smoothing: antialiased;
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+  margin: 0;
+}
+
+* { box-sizing: border-box; }
+
+/* ───── Cover ───── */
+.cover {
+  page-break-after: always;
+  padding: 0;
+  color: var(--ink-900);
+  font-family: var(--font-body);
+}
+.cover-rule { height: 1px; background: var(--ink-900); width: 100%; }
+.cover-rule-top { margin-bottom: 16mm; }
+.cover-rule-bottom { margin-top: 14mm; }
+.cover-meta {
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-family: var(--font-mono); font-size: 8pt; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--ink-700);
+  margin-bottom: 28mm;
+}
+.cover-stage { display: block; }
+.cover-mark { width: 100%; max-width: var(--col); margin: 0 0 14mm 0; }
+.cover-mark svg { width: 64mm; height: auto; display: block; }
+.cover-title-block { max-width: var(--col); }
+.cover-kicker {
+  display: block; font-family: var(--font-mono); font-size: 8.5pt;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-700);
+  margin-bottom: 6mm;
+}
+.cover-title {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: 34pt; line-height: 38pt; letter-spacing: -0.01em;
+  margin: 0 0 8mm 0; color: var(--ink-900); max-width: 150mm;
+}
+.cover-deck {
+  font-family: var(--font-body); font-size: 11pt; line-height: 17pt;
+  color: var(--ink-700); max-width: 138mm; margin: 0;
+}
+.cover-footer {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 8mm;
+  margin-top: 28mm; padding-top: 6mm; border-top: 0.5pt solid var(--ink-100);
+}
+.cover-stat { display: flex; flex-direction: column; gap: 2mm; }
+.cover-stat-num {
+  font-family: var(--font-display); font-size: 16pt; line-height: 20pt;
+  color: var(--ink-900); font-feature-settings: 'tnum' 1;
+}
+.cover-stat-label {
+  font-family: var(--font-mono); font-size: 7.5pt; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--ink-500);
+}
+
+/* ───── Chapter shell ───── */
+.chapter { /* model rule replaced by assembler — see flow-lock block below */ }
+.chapter-header {
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-family: var(--font-mono); font-size: 7.5pt;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-500); border-bottom: 0.5pt solid var(--ink-100);
+  padding-bottom: 3mm; margin-bottom: 8mm;
+}
+.chapter-eyebrow { color: var(--accent-700); }
+.chapter-part-banner {
+  font-family: var(--font-mono); font-size: 7.5pt;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--accent-700);
+}
+.chapter-heading {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: 19pt; line-height: 24pt; letter-spacing: -0.005em;
+  color: var(--ink-900); margin: 0 0 6mm 0; max-width: var(--col);
+}
+.chapter-framing {
+  font-family: var(--font-display); font-style: italic;
+  font-size: 11pt; line-height: 17pt; color: var(--ink-700);
+  max-width: 150mm; margin: 0 0 9mm 0;
+  padding-left: 5mm; border-left: 1.5pt solid var(--accent-700);
+}
+.chapter-visual { margin: 0 0 9mm 0; max-width: var(--col); }
+.chapter-visual svg, .chapter-visual img { max-width: 100%; height: auto; display: block; }
+.chapter-body { max-width: var(--col); }
+.chapter-body p {
+  margin: 0 0 5mm 0; font-size: 10.25pt; line-height: 16pt;
+  color: var(--ink-900); orphans: 3; widows: 3;
+}
+.chapter-body p + p { margin-top: 0; }
+.chapter-body h3 {
+  font-family: var(--font-body); font-weight: 600;
+  font-size: 11pt; line-height: 16pt; letter-spacing: 0.01em;
+  color: var(--ink-900); margin: 8mm 0 3mm 0;
+}
+.chapter-body strong { color: var(--ink-900); font-weight: 600; }
+.chapter-body ul, .chapter-body ol {
+  margin: 0 0 5mm 0; padding-left: 5mm;
+}
+.chapter-body li { margin-bottom: 2mm; line-height: 16pt; }
+.chapter-takeaway {
+  margin: 10mm 0 0 0; padding: 5mm 6mm;
+  background: var(--surface-200); border-left: 2pt solid var(--accent-700);
+  font-family: var(--font-display); font-style: italic;
+  font-size: 10.5pt; line-height: 16pt; color: var(--ink-900);
+  max-width: var(--col);
+}
+.chapter-takeaway::before {
+  content: 'USE CASE'; display: block;
+  font-family: var(--font-mono); font-style: normal;
+  font-size: 7pt; letter-spacing: 0.18em; color: var(--accent-700);
+  margin-bottom: 2mm;
+}
+
+/* ───── Tables — the spine of every chapter ───── */
+.chapter table, .chapter-body table {
+  width: 100%; max-width: var(--col);
+  border-collapse: collapse; margin: 0 0 8mm 0;
+  font-family: var(--font-body); font-size: 9.5pt;
+  font-feature-settings: 'tnum' 1, 'lnum' 1;
+  border-top: 1pt solid var(--ink-900);
+  border-bottom: 1pt solid var(--ink-900);
+}
+.chapter table thead th, .chapter-body table thead th {
+  font-family: var(--font-mono); font-weight: 500;
+  font-size: 7.5pt; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink-700); text-align: left;
+  padding: 3mm 4mm 3mm 0; border-bottom: 0.5pt solid var(--ink-300);
+  vertical-align: bottom;
+}
+.chapter table tbody td, .chapter-body table tbody td {
+  padding: 3mm 4mm 3mm 0; border-bottom: 0.25pt solid var(--ink-100);
+  vertical-align: top; color: var(--ink-900);
+}
+.chapter table tbody tr:last-child td, .chapter-body table tbody tr:last-child td {
+  border-bottom: none;
+}
+.chapter table td.num, .chapter-body table td.num,
+.chapter table th.num, .chapter-body table th.num {
+  text-align: right; font-variant-numeric: tabular-nums;
+  padding-right: 0;
+}
+.chapter table td:last-child, .chapter-body table td:last-child,
+.chapter table th:last-child, .chapter-body table th:last-child {
+  padding-right: 0;
+}
+
+/* ───── Stat tiles ───── */
+.stat-row {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 6mm;
+  margin: 0 0 8mm 0; max-width: var(--col);
+}
+.stat-row.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.stat-row.cols-2 { grid-template-columns: repeat(2, 1fr); }
+.stat-tile { display: flex; flex-direction: column; gap: 2mm; padding-top: 3mm; border-top: 0.5pt solid var(--ink-900); }
+.stat-tile .num {
+  font-family: var(--font-display); font-size: 17pt; line-height: 20pt;
+  color: var(--ink-900); font-feature-settings: 'tnum' 1;
+}
+.stat-tile .label {
+  font-family: var(--font-mono); font-size: 7pt; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--ink-500);
+}
+
+/* ───── Pull quote ───── */
+.pull-quote {
+  margin: 8mm 0; padding: 6mm 0; max-width: 150mm;
+  border-top: 0.5pt solid var(--ink-900); border-bottom: 0.5pt solid var(--ink-900);
+  font-family: var(--font-display); font-size: 13pt; line-height: 19pt;
+  color: var(--ink-900);
+}
+
+/* ───── Mono inline ───── */
+.chapter code, .chapter-body code, .mono {
+  font-family: var(--font-mono); font-size: 9pt;
+  color: var(--accent-900); background: var(--surface-200);
+  padding: 0.5mm 1.5mm; border-radius: 1pt;
+}
+
+/* ───── Inline part banner (NOT a full divider) ───── */
+.part-banner-inline {
+  display: block; font-family: var(--font-mono);
+  font-size: 7.5pt; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--accent-700); margin-bottom: 4mm;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   CONTINUOUS-FLOW DOCUMENT MODEL
+   The brief renders as one centred reading column on screen. No
+   page cards, no fixed-height containers. All overlap and overrun
+   bugs we hit previously came from simulating A4 cards on screen
+   while the Design Consultant authored print-target CSS that
+   sized chapters to 253mm. By dropping the simulation, those
+   competing layout systems no longer fight.
+   ════════════════════════════════════════════════════════════════ */
+
+/* Inline PART banner — small bar above the first chapter of each part. */
+.part-banner {
+  font-size: 8.5pt;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-700, #2E5C49);
+  font-weight: 600;
+  border-top: 0.5pt solid var(--accent-700, #2E5C49);
+  padding-top: 8pt;
+  margin: 28pt 0 12pt 0;
+}
+/* CONTAINER OVERFLOW DISCIPLINE — cap horizontal width so wide
+   SVG/widget content cannot push past the column, but DO NOT clip
+   vertically. overflow-x:clip + overflow-y:visible is the supported
+   combination that keeps tall content visible while still trimming
+   horizontal leak. Plain overflow:hidden clips both axes and was
+   cropping the bottom of long chapter pages. */
+.chapter, section.chapter {
+  max-width: 100%;
+  overflow-x: clip;
+  overflow-y: visible;
+  /* FLOW LOCK — model-authored baseCss has been seen to position the
+     heading absolutely and overlay it onto the body. Force normal
+     block flow at the chapter root so heading/framing/visual/body/
+     takeaway always stack vertically without overlap. */
+  display: block !important;
+  position: relative !important;
+  transform: none !important;
+  grid-template-columns: none !important;
+  grid-template-rows: none !important;
+  /* CONTENT-CLIP DEFENSE — Design Consultant has authored
+     "max-height: 249mm; overflow: hidden" on .chapter to force
+     one-page chapters. Combined with content longer than 249mm,
+     the bottom of the chapter gets clipped and the next card
+     visually starts under the clipped content, producing the
+     "text on text" overlap. Force every chapter to grow with its
+     own content. */
+  max-height: none !important;
+  min-height: 0 !important;
+  height: auto !important;
+  overflow: visible !important;
+  /* Flex column with margin-top:auto on takeaway pushes the
+     takeaway to the bottom of a fixed-height card. With block
+     layout, margin-top:auto resolves to 0 and the takeaway sits
+     right after the body — exactly what we want. */
+}
+.chapter > *, section.chapter > * {
+  max-width: 100%;
+  box-sizing: border-box;
+  /* Defensive: prevent direct chapter children from being absolutely
+     positioned, transformed, or grid-placed in ways that overlap. */
+  position: static !important;
+  transform: none !important;
+  float: none !important;
+  grid-area: auto !important;
+  grid-column: auto !important;
+  grid-row: auto !important;
+  clear: both;
+}
+/* Heading + framing + body + visual + takeaway always stack as
+   blocks — no flex/grid containment that could overlap them. Selectors
+   cover both kebab (.chapter-heading) AND BEM (.chapter__heading)
+   class conventions the Design Consultant has used. */
+.chapter-heading, .chapter__heading, .chapter-framing, .chapter__framing,
+.chapter-body, .chapter__body, .chapter-visual, .chapter__visual,
+.chapter-takeaway, .chapter__takeaway,
+section.chapter h1, section.chapter h2, section.chapter h3, section.chapter p {
+  display: block !important;
+  position: static !important;
+  transform: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  /* Defense against narrow-container wrap: heading + body must use the
+     full text column. A previous brief had each heading word on its
+     own line because a parent constrained width. Force the text-flow
+     elements to claim the full content column. */
+  width: 100% !important;
+  max-width: 165mm !important;
+  min-width: 0 !important;
+  white-space: normal !important;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+}
+.chapter-heading, .chapter__heading,
+h2.chapter-heading, h2.chapter__heading,
+section.chapter > header h2, section.chapter > .chapter__head h2,
+section.chapter > .chapter-head h2 {
+  margin-top: 8pt !important;
+  margin-bottom: 8pt !important;
+  /* Hard cap on heading size — model has emitted 22-26pt in past briefs
+     which overflowed page-card boundaries and overlapped the next
+     chapter's body on screen. 20pt is the typographic ceiling. */
+  font-size: clamp(14pt, 1.5em, 20pt) !important;
+  line-height: 1.2 !important;
+  max-width: 165mm !important;
+  width: 100% !important;
+  white-space: normal !important;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+  hyphens: manual !important;
+}
+/* Prevent direct chapter children + their first level from
+   rendering with position:absolute/fixed/sticky — those bypass
+   the page-card boundary and produce the heading-on-body overlap.
+   Scoped to direct children only so SVG visuals inside
+   .chapter-visual can still position internal elements freely. */
+section.chapter > *, section.chapter > * > * {
+  position: static !important;
+}
+.chapter-framing, .chapter__framing { margin-top: 4pt !important; margin-bottom: 12pt !important; }
+.chapter-visual, .chapter__visual { margin-top: 8pt !important; margin-bottom: 12pt !important; }
+.chapter-body, .chapter__body { margin-top: 8pt !important; margin-bottom: 12pt !important; }
+.chapter-takeaway, .chapter__takeaway { margin-top: 12pt !important; }
+/* Universal width recovery — any element inside a chapter that is
+   carrying body-text content must use the full content column.
+   Defends against the "Slack export" word-per-line wrap caused by a
+   parent or model rule constraining the text column to a tiny width. */
+section.chapter, section.chapter > *,
+section.chapter > * > *,
+section.chapter header, section.chapter .chapter-head, section.chapter .chapter__head {
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+section.chapter p, section.chapter li, section.chapter blockquote,
+section.chapter .callout, section.chapter .pullquote, section.chapter aside {
+  width: auto !important;
+  max-width: 165mm !important;
+  min-width: 0 !important;
+  display: block !important;
+  white-space: normal !important;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+}
+/* Callouts and pullquotes use the same column as the body so their
+   text doesn't wrap word-per-line when the model styled them with a
+   narrow inline-block or fit-content width. */
+.chapter .callout, .chapter__body .callout, section.chapter .callout {
+  display: block !important;
+  width: 100% !important;
+  max-width: 165mm !important;
+  box-sizing: border-box !important;
+}
+.chapter pre, .chapter code, section.chapter pre, section.chapter code {
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
+  overflow-wrap: anywhere !important;
+}
+.chapter svg, section.chapter svg, .chapter figure svg { max-width: 100% !important; height: auto !important; }
+.chapter-visual {
+  max-width: 100%;
+  overflow-x: clip;
+  overflow-y: visible;
+}
+.chapter-visual > * { max-width: 100%; box-sizing: border-box; }
+
+/* DOMINANT TABLE STYLING — tables are the primary structural element
+   in chapter bodies. Generous padding, clean separators, aligned
+   numerics. Applied as defensive baseline; Design Consultant CSS may
+   override but cannot make tables worse. */
+.chapter-body table, table.brief-table, .chapter table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14pt 0 18pt 0;
+  font-size: 10pt;
+  page-break-inside: avoid;
+  break-inside: avoid;
+  border-top: 1pt solid var(--ink-700, #34405a);
+  border-bottom: 1pt solid var(--ink-700, #34405a);
+}
+.chapter-body th, table.brief-table th, .chapter th {
+  font-size: 8.5pt;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--ink-700, #34405a);
+  text-align: left;
+  padding: 8pt 12pt 8pt 0;
+  border-bottom: 0.5pt solid var(--ink-300, #c2c2c2);
+  vertical-align: bottom;
+}
+.chapter-body td, table.brief-table td, .chapter td {
+  padding: 8pt 12pt 8pt 0;
+  border-bottom: 0.5pt solid var(--ink-200, #e2e2e2);
+  vertical-align: top;
+  color: var(--ink-800, #1d2735);
+  line-height: 1.4;
+}
+.chapter-body tr:last-child td, .chapter tr:last-child td { border-bottom: none; }
+/* Numeric cells right-align (detected by class or by the .num
+   convention used in structure-report). */
+.chapter-body td.num, .chapter td.num, td.numeric, th.num, th.numeric { text-align: right; font-variant-numeric: tabular-nums; }
+/* Table caption gets the eyebrow treatment. */
+.chapter-body table caption, .chapter caption {
+  caption-side: top;
+  text-align: left;
+  font-size: 8.5pt;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-500, #687792);
+  margin-bottom: 6pt;
+}
+/* Inline code / file paths — make them visually prominent so ops
+   artefacts the brief names are scannable. */
+.chapter-body code, .chapter code {
+  font-family: 'JetBrains Mono', Menlo, monospace;
+  font-size: 9pt;
+  background: var(--ink-100, #eef1f6);
+  padding: 1pt 4pt;
+  border-radius: 2pt;
+  color: var(--ink-900, #0f1722);
+}
+@media print {
+  html, body {
+    background: #ffffff !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  /* No screen-mode visual chrome in print. */
+  article.brief {
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    background: #ffffff !important;
+  }
+  article.brief > section.chapter::before { display: none !important; }
+  /* Reset any height/overflow chapter-shell rules so the print engine's
+     own @page pagination drives the layout. Heights stay intrinsic. */
+  .page-wrap, .page, .chapter, section.chapter,
+  .chapter-body, .chapter-content, .chapter-inner,
+  .chapter-eyebrow, .chapter-heading, .chapter-framing,
+  .chapter-visual, .chapter-takeaway, .part-banner {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+  /* Each chapter starts a new page in PDF. Cover gets its own page. */
+  section.chapter, article.brief > section.chapter {
+    page-break-before: always !important;
+    break-before: page !important;
+    page-break-inside: auto !important;
+    break-inside: auto !important;
+  }
+  article.brief > section.chapter:first-of-type {
+    page-break-before: auto !important;
+    break-before: auto !important;
+  }
+  .cover, section.cover, div.cover {
+    page-break-after: always !important;
+    break-after: page !important;
+    min-height: 0 !important; height: auto !important;
+  }
+  /* Keep heading/framing/banner with what follows. */
+  .chapter-heading, h2.chapter-heading, .chapter-framing,
+  .part-banner, .chapter-eyebrow, h2, h3 {
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+  /* Visuals and tables stay intact. */
+  .chapter-visual, figure, table {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+  /* Suppress full-page dividers. */
+  .part-divider, .divider, section.divider { display: none !important; }
+  /* Hard cap to avoid horizontal overflow. */
+  svg, img, canvas, table {
+    max-width: 100% !important; height: auto !important; box-sizing: border-box;
+  }
+  /* Aggressive whitespace + leak strip — empty containers the
+     Design Consultant left around Mustache placeholders should not
+     render as blank vertical gaps. */
+  li:empty, p:empty, ul:empty, ol:empty, div:empty, span:empty,
+  dl:empty, dt:empty, dd:empty, section:empty {
+    display: none !important;
+  }
+  /* Any element whose visible text is only mustache leftover —
+     belt-and-braces in case the strip missed a corner. */
+  .mustache-leak { display: none !important; }
+}
+@media screen {
+  html, body {
+    background: #f7f5f0;
+    margin: 0;
+    color: var(--ink-900, #15171c);
+  }
+  /* Single reading column. No page cards. The brief renders as one
+     continuous long-form document, like a Stripe doc or an FT essay. */
+  article.brief {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 64px 32px 96px;
+    background: #ffffff;
+    box-sizing: border-box;
+    box-shadow: 0 0 0 1px rgba(20,30,40,0.04);
+  }
+  /* Cover sits at the top of the column; chapters flow underneath. */
+  article.brief > section.cover,
+  article.brief > .cover,
+  article.brief > div.cover {
+    margin: 0 0 56px 0;
+    padding-bottom: 48px;
+    border-bottom: 1pt solid #d8dde6;
+  }
+  /* Each chapter gets natural top spacing as a separator. No card,
+     no fixed height, no overflow clipping. The chapter's content
+     defines its height. */
+  article.brief > section.chapter {
+    margin: 56px 0 0 0;
+    padding: 0;
+  }
+  article.brief > section.chapter:first-of-type { margin-top: 0; }
+  /* Soft separator between chapters — a thin rule above the eyebrow,
+     nothing that can clip text. */
+  article.brief > section.chapter::before {
+    content: "";
+    display: block;
+    width: 48px;
+    height: 1pt;
+    background: var(--accent-700, #2E5C49);
+    margin-bottom: 28px;
+  }
+  /* Wide media still capped to the column. */
+  article.brief svg, article.brief img, article.brief canvas, article.brief table {
+    max-width: 100%;
+    height: auto;
+  }
+  article.brief svg { display: block; }
+  article.brief .chapter-visual,
+  article.brief .chapter__visual,
+  article.brief figure {
+    margin: 24px 0;
+    overflow-x: auto;
+    overflow-y: visible;
+  }
+  /* Hide any full-page divider sections — those existed only to
+     simulate cover/back pages in the previous card model. */
+  .part-divider, .divider, section.divider { display: none !important; }
+  /* Legacy .page-wrap and .page may still appear in older briefs
+     viewed via the same iframe; flatten them so nothing is clipped. */
+  .page-wrap, .page {
+    display: contents !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   HEADING SAFETY — last-line-of-defense against narrow-column
+   rendering. Selectors target every heading path the Design
+   Consultant uses (kebab BEM, double-underscore BEM, bare h2,
+   <header> wrapper).
+   ════════════════════════════════════════════════════════════════ */
+@media screen {
+  article.brief section.chapter h1,
+  article.brief section.chapter h2,
+  article.brief section.chapter h3,
+  article.brief section.chapter > header h1,
+  article.brief section.chapter > header h2,
+  article.brief section.chapter > header h3,
+  article.brief section.chapter .chapter__head h1,
+  article.brief section.chapter .chapter__head h2,
+  article.brief section.chapter .chapter__head h3,
+  article.brief section.chapter .chapter-head h1,
+  article.brief section.chapter .chapter-head h2,
+  article.brief section.chapter .chapter-head h3 {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+    font-size: clamp(20pt, 2.4em, 28pt) !important;
+    line-height: 1.18 !important;
+    margin: 0 0 12pt 0 !important;
+  }
+  /* Body, framing, takeaway always fill the column. */
+  article.brief section.chapter p,
+  article.brief section.chapter li,
+  article.brief section.chapter blockquote,
+  article.brief section.chapter .chapter-body,
+  article.brief section.chapter .chapter__body,
+  article.brief section.chapter .chapter-framing,
+  article.brief section.chapter .chapter__framing,
+  article.brief section.chapter .chapter-takeaway,
+  article.brief section.chapter .chapter__takeaway {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+  }
+
+  /* CHARACTER-WRAP DEFENSE — Page Designer has authored inline
+     grid layouts with very narrow first columns (e.g. 60px) that
+     force every character of a word onto its own line. The screenshot
+     showing "510(k) Preparation" wrapping one character per line is
+     this bug. Force every text-bearing element inside .chapter-visual
+     to use word-level wrap. Combined with the grid override below,
+     no narrow grid cell can produce vertical-character text. */
+  article.brief section.chapter .chapter-visual,
+  article.brief section.chapter .chapter__visual,
+  article.brief section.chapter .chapter-visual *,
+  article.brief section.chapter .chapter__visual *,
+  article.brief section.chapter figure,
+  article.brief section.chapter figure * {
+    word-break: keep-all !important;
+    overflow-wrap: normal !important;
+    hyphens: manual !important;
+  }
+  /* Allow long technical strings (URLs, paths, hashes) to break, but
+     only at word boundaries — never per-character. */
+  article.brief section.chapter code,
+  article.brief section.chapter pre {
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+  }
+  /* Grid layouts inside chapter-visual must keep their first column
+     wide enough to fit a label. Page Designer authored
+     grid-template-columns 60px 1fr which is too narrow for any
+     label longer than 5 characters. Force a minimum readable width
+     on every grid template column the model authored. */
+  article.brief section.chapter [style*="grid-template-columns"] {
+    grid-template-columns: minmax(140px, auto) minmax(0, 1fr) !important;
+  }
+  /* Generic guard for any inline-styled cell that ended up too narrow:
+     guarantee every direct child of a grid or flex container has
+     min-width 0 (so text can wrap), but DO NOT allow per-character
+     wrap. */
+  article.brief section.chapter .chapter-visual > *,
+  article.brief section.chapter .chapter__visual > *,
+  article.brief section.chapter figure > * {
+    min-width: 0 !important;
+  }
+}
+
+
+
+
+.ch-visual { font-family: var(--font-body); color: var(--ink-900); max-width: var(--col); }
+.ch-eyebrow { font-family: var(--font-mono); font-size: 8pt; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-700); margin-bottom: 4mm; }
+.ch-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2mm; margin-bottom: 8mm; }
+.ch-tile { border: 0.5pt solid var(--ink-300); background: var(--surface-200); padding: 4mm 3mm; min-height: 28mm; display: flex; flex-direction: column; justify-content: space-between; }
+.ch-tile .num { font-family: var(--font-mono); font-size: 7.5pt; color: var(--ink-500); letter-spacing: 0.1em; }
+.ch-tile .name { font-family: var(--font-mono); font-size: 8.5pt; color: var(--ink-900); line-height: 11pt; word-break: break-word; }
+.ch-tile .role { font-size: 7.5pt; color: var(--ink-500); line-height: 10pt; }
+.ch-tile.survey { background: var(--surface-200); }
+.ch-files { width: 100%; border-collapse: collapse; margin-top: 2mm; }
+.ch-files caption { font-family: var(--font-mono); font-size: 8pt; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-700); text-align: left; padding-bottom: 3mm; }
+.ch-files th, .ch-files td { text-align: left; padding: 2.5mm 3mm; border-bottom: 0.4pt solid var(--ink-100); font-size: 9.5pt; vertical-align: top; }
+.ch-files thead th { border-top: 0.8pt solid var(--ink-900); border-bottom: 0.8pt solid var(--ink-900); font-family: var(--font-mono); font-size: 7.5pt; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-700); font-weight: 500; }
+.ch-files tbody tr:last-child td { border-bottom: 0.8pt solid var(--ink-900); }
+.ch-files .file { font-family: var(--font-mono); font-size: 8.5pt; color: var(--ink-900); white-space: nowrap; }
+.ch-files .domain { font-family: var(--font-mono); font-size: 7.5pt; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-700); }
+.ch-files .role-cell { color: var(--ink-700); }
+.ch-caption { font-size: 8.5pt; color: var(--ink-500); margin-top: 4mm; line-height: 12pt; max-width: 140mm; }
+
+
+/* ───── Key-figures hero band (frontloaded numbers after cover) ───── */
+.figband { max-width: var(--col); margin: 0 0 14mm 0; }
+.figband-eyebrow { font-family: var(--font-mono); font-size: 8pt; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-700); margin-bottom: 5mm; padding-bottom: 3mm; border-bottom: 0.5pt solid var(--ink-100); }
+.figband-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; border-top: 1pt solid var(--ink-900); border-bottom: 1pt solid var(--ink-900); }
+.figband-cell { padding: 7mm 7mm 7mm 0; border-bottom: 0.5pt solid var(--ink-100); }
+.figband-cell:nth-child(odd) { border-right: 0.5pt solid var(--ink-100); }
+.figband-cell:nth-child(even) { padding-left: 7mm; }
+.figband-cell:nth-last-child(-n+2) { border-bottom: none; }
+.figband-num { font-family: var(--font-display); font-weight: 400; font-size: 30pt; line-height: 30pt; letter-spacing: -0.015em; color: var(--ink-900); font-feature-settings: 'tnum' 1; }
+.figband-num .u { font-size: 15pt; color: var(--accent-700); }
+.figband-label { font-family: var(--font-mono); font-size: 7.5pt; letter-spacing: 0.13em; text-transform: uppercase; color: var(--ink-500); margin-top: 3mm; line-height: 11pt; }
+
+/* ───── Magnitude bars (visualize a numeric comparison) ───── */
+.magbars { max-width: var(--col); margin: 2mm 0 8mm 0; }
+.magrow { display: grid; grid-template-columns: 52mm 1fr 30mm; gap: 5mm; align-items: center; padding: 2.6mm 0; border-bottom: 0.25pt solid var(--ink-100); }
+.magrow:last-child { border-bottom: none; }
+.magrow .ml { font-size: 9pt; color: var(--ink-900); }
+.magrow .ml.lead { font-weight: 600; }
+.magrow .mt { height: 4.5mm; background: var(--surface-200); position: relative; display: block; overflow: hidden; }
+.magrow .mf { display: block; height: 4.5mm; min-width: 1.5mm; background: var(--accent-700); }
+.magrow .mf.soft { background: var(--accent-500); }
+.magrow .mv { font-family: var(--font-mono); font-size: 8.5pt; color: var(--ink-700); text-align: right; font-variant-numeric: tabular-nums; }
+.magcap { font-family: var(--font-mono); font-size: 7.5pt; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-500); margin-top: 4mm; }
+
+
+</style>
+</head>
+<body>
+<article class="brief">
+
+  <section class="cover">
+    <div class="cover-rule cover-rule-top"></div>
+    <div class="cover-meta"><span>Atlas by Meridian · Dataset Overview</span><span>June 2026 · Confidential</span></div>
+    <div class="cover-stage">
+      <div class="cover-title-block">
+        <span class="cover-kicker">mdhub · United States</span>
+        <h1 class="cover-title">Outpatient behavioral-health care, captured as paired conversation and signed note.</h1>
+        <p class="cover-deck">A purpose-built mental-health electronic health record across all fifty states: verbatim session transcripts, signed clinical notes, synchronized audio, and longitudinal follow-up on one patient timeline.</p>
+      </div>
+    </div>
+    <footer class="cover-footer">
+      <div class="cover-stat"><span class="cover-stat-num">1.25M</span><span class="cover-stat-label">Patients</span></div>
+      <div class="cover-stat"><span class="cover-stat-num">3M</span><span class="cover-stat-label">Sessions</span></div>
+      <div class="cover-stat"><span class="cover-stat-num">1.67M</span><span class="cover-stat-label">Audio hours</span></div>
+      <div class="cover-stat"><span class="cover-stat-num">50</span><span class="cover-stat-label">States</span></div>
+    </footer>
+    <div class="cover-rule cover-rule-bottom"></div>
+  </section>
+
+  <section class="chapter">
+    <div class="figband">
+      <div class="figband-eyebrow">Corpus at a glance</div>
+      <div class="figband-grid">
+        <div class="figband-cell"><div class="figband-num">1.25<span class="u">M</span></div><div class="figband-label">De-identified patients</div></div>
+        <div class="figband-cell"><div class="figband-num">3<span class="u">M</span></div><div class="figband-label">Completed sessions</div></div>
+        <div class="figband-cell"><div class="figband-num">1.67<span class="u">M</span></div><div class="figband-label">Hours of clinical audio</div></div>
+        <div class="figband-cell"><div class="figband-num">10<span class="u">K+</span></div><div class="figband-label">Clinicians · ~4,500 facilities</div></div>
+        <div class="figband-cell"><div class="figband-num">17<span class="u">K</span></div><div class="figband-label">New sessions / business day</div></div>
+        <div class="figband-cell"><div class="figband-num">1.67<span class="u">M</span></div><div class="figband-label">Hours of clinical audio</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <div class="part-banner">PART I · Operating Scope</div>
+    <div class="chapter-header"><span class="chapter-eyebrow">Section 01</span><span class="chapter-folio">mdhub Behavioral Health Corpus</span></div>
+    <h2 class="chapter-heading">A purpose-built mental-health record system spanning all fifty United States.</h2>
+    <p class="chapter-framing">Documentation, telehealth, scheduling, and billing unified for one clinical specialty.</p>
+    <div class="stat-row cols-3">
+      <div class="stat-tile"><span class="num">50</span><span class="label">States covered</span></div>
+      <div class="stat-tile"><span class="num">~4,500</span><span class="label">Facilities</span></div>
+      <div class="stat-tile"><span class="num">50K+</span><span class="label">Sessions / month per network</span></div>
+    </div>
+    <div class="chapter-body">
+      <p>mdhub, Inc. is a United States company operating a purpose-built electronic health record and practice-management platform for mental-health workflows, managing clinical documentation, telehealth delivery, scheduling, customer-relationship logs, and revenue-cycle billing. The dataset originates entirely from private clinics located across all fifty states, with defined operational concentrations inside regional provider networks in Florida, California, and the Kansas City metropolitan area.</p>
+      <p>The database is populated by a provider-reported network of <strong>over 10,000 clinicians</strong> practicing across approximately 4,500 distinct behavioral-health facilities. Individual regional subscriber networks contain over 600 clinicians who execute more than <strong>50,000 distinct clinical sessions per month</strong>.</p>
+      <p>The mix encompasses the full case-mix of United States mental-health practice: psychiatrists holding MD or DO degrees, psychiatric nurse practitioners (PMHNP, NP), licensed clinical therapists (LCSW, LPC, MFT, and clinical psychologists), and specialized eating-disorder treatment program directors.</p>
+      <div class="chapter-takeaway">A foundation for clinical model development grounded in real United States outpatient mental-health care, recorded at the point of contact.</div>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <div class="part-banner">PART II · Corpus Scale &amp; Token Volume</div>
+    <div class="chapter-header"><span class="chapter-eyebrow">Section 02</span><span class="chapter-folio">mdhub Behavioral Health Corpus</span></div>
+    <h2 class="chapter-heading">Three million completed sessions, each pairing a verbatim transcript with a signed clinical note.</h2>
+    <p class="chapter-framing">Scale concentrated in paired, multimodal sessions across a three-year continuous record.</p>
+    <div class="chapter-body">
+      <p>The longitudinal database is a scaled collection of behavioral-health encounters generated during routine outpatient care across a three-year continuous tracking window. The corpus grows by more than <strong>17,000 new sessions each business day</strong>, incorporating approximately 350,000 new records per month.</p>
+      <div class="magbars">
+        <div class="magrow"><span class="ml lead">Completed sessions</span><span class="mt"><span class="mf" style="width:100%"></span></span><span class="mv">3.0M</span></div>
+        <div class="magrow"><span class="ml">Unique patients</span><span class="mt"><span class="mf" style="width:42%"></span></span><span class="mv">1.25M</span></div>
+        <div class="magrow"><span class="ml">Audio hours</span><span class="mt"><span class="mf soft" style="width:56%"></span></span><span class="mv">1.67M</span></div>
+        <div class="magrow"><span class="ml">Monthly new records</span><span class="mt"><span class="mf soft" style="width:12%"></span></span><span class="mv">350K</span></div>
+      </div>
+      <div class="magcap">Core corpus assets · platform database audit</div>
+      <table>
+        <thead><tr><th>Metric</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Completed clinical sessions</td><td>~3,000,000</td></tr>
+          <tr><td>De-identified patients</td><td>1,250,000</td></tr>
+          <tr><td>Hours of clinical audio</td><td>1,670,000</td></tr>
+          <tr><td>New sessions per business day</td><td>17,000+</td></tr>
+        </tbody>
+      </table>
+      <div class="chapter-takeaway">Paired transcript-and-note sessions at scale, suited to clinical documentation modeling.</div>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <div class="part-banner">PART III · Record Architecture</div>
+    <div class="chapter-header"><span class="chapter-eyebrow">Section 03</span><span class="chapter-folio">mdhub Behavioral Health Corpus</span></div>
+    <h2 class="chapter-heading">Four aligned document layers on one patient timeline.</h2>
+    <p class="chapter-framing">Unstructured dialogue, signed notes, audio, and longitudinal follow-up in one encounter record.</p>
+    <div class="chapter-body">
+      <table>
+        <thead><tr><th>Record layer</th><th>Content</th><th class="num">Median size</th></tr></thead>
+        <tbody>
+          <tr><td>Turn-by-turn transcripts</td><td>Verbatim clinician–patient conversation across medication check-ins, psychotherapy, and intake</td><td class="num">~1,850 words</td></tr>
+          <tr><td>Structured clinical notes</td><td>Signed SOAP, DAP, BIRP, medication-review, and psychiatric-intake schemas</td><td class="num">~840 words</td></tr>
+          <tr><td>Multi-modal audio</td><td>Synchronized voice at uniform 16 kHz mono, brief check-ups to full evaluations</td><td class="num">1.67M hours</td></tr>
+          <tr><td>Continuity summaries</td><td>Carried-forward follow-up plans plus plain-language after-visit summaries</td><td class="num">Per visit</td></tr>
+        </tbody>
+      </table>
+      <p>Every complete encounter groups these layers into a single timeline per patient, so a conversation, its signed documentation, its audio, and its forward plan all resolve to one identifier.</p>
+      <div class="chapter-takeaway">A natively paired transcript-and-note structure, the exact input-output shape conversation-to-note systems require.</div>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <div class="part-banner">PART IV · Clinical Depth</div>
+    <div class="chapter-header"><span class="chapter-eyebrow">Section 04</span><span class="chapter-folio">mdhub Behavioral Health Corpus</span></div>
+    <h2 class="chapter-heading">High-prevalence conditions captured at real-world frequency.</h2>
+    <p class="chapter-framing">Representative diagnoses by share of coded patients.</p>
+    <div class="magbars">
+      <div class="magrow"><span class="ml lead">Generalized anxiety</span><span class="mt"><span class="mf" style="width:88%"></span></span><span class="mv">88%</span></div>
+      <div class="magrow"><span class="ml">Major depressive</span><span class="mt"><span class="mf" style="width:72%"></span></span><span class="mv">72%</span></div>
+      <div class="magrow"><span class="ml">ADHD</span><span class="mt"><span class="mf" style="width:54%"></span></span><span class="mv">54%</span></div>
+      <div class="magrow"><span class="ml">PTSD</span><span class="mt"><span class="mf soft" style="width:31%"></span></span><span class="mv">31%</span></div>
+    </div>
+    <div class="magcap">Diagnostic prevalence across coded patients</div>
+    <div class="chapter-body">
+      <h3>Conditions &amp; risk coding</h3>
+      <p>Longitudinal text tracks define clinical reasoning for generalized anxiety, recurrent and single-episode major depression, ADHD (inattentive, combined, unspecified), PTSD, OCD, panic disorder, bipolar disorder, and schizophrenia, with specialized cohorts tracing restricting and binge-eating or purging variants of anorexia nervosa. Diagnostic fields explicitly index recurrent suicidal ideation, linked to specialized clinical safety documentation, and capture comorbid hypertension, epilepsy, obstructive sleep apnea, and asthma.</p>
+      <h3>Psychopharmacology</h3>
+      <p>Medication records capture active drug names, dosages, indications, and active or discontinued status flags across SSRIs, CNS stimulants and non-stimulants for ADHD, atypical antipsychotics, anxiolytics, sleep aids, and tricyclic antidepressants.</p>
+      <div class="chapter-takeaway">Real-world prevalence and prescribing patterns suited to safety-critical and symptom-severity research.</div>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <div class="part-banner">PART V · Coding &amp; Conventions</div>
+    <div class="chapter-header"><span class="chapter-eyebrow">Section 05</span><span class="chapter-folio">mdhub Behavioral Health Corpus</span></div>
+    <h2 class="chapter-heading">Native codes cross-walked to international standards under HIPAA Safe Harbor.</h2>
+    <div class="chapter-body">
+      <table>
+        <thead><tr><th>Standard</th><th>Application</th></tr></thead>
+        <tbody>
+          <tr><td>ICD-10</td><td>Diagnoses in a discrete structured field with code, definition, and active or resolved flag; a median of 2 and up to 9 concurrent codes</td></tr>
+          <tr><td>RxNorm</td><td>Free-text medication histories map to ingredient concepts, a median of 3 and up to 15 per coded patient</td></tr>
+          <tr><td>LOINC</td><td>Validated instruments scored in note text (PHQ-9, GAD-7, PCL-5, AIMS) map to survey panels</td></tr>
+          <tr><td>HIPAA Safe Harbor</td><td>De-identification under 45 CFR 164.514 with third-party validation and SOC 2 Type II certification</td></tr>
+        </tbody>
+      </table>
+      <p>Names, provider keys, and locations are replaced with stable pseudonyms to preserve cross-encounter joinability, while calendars generalize to year metrics.</p>
+      <div class="chapter-takeaway">Aligned code-and-text pairs with provenance that satisfies United States health-privacy law.</div>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <div class="part-banner">PART VI · Research Capabilities</div>
+    <div class="chapter-header"><span class="chapter-eyebrow">Section 06</span><span class="chapter-folio">mdhub Behavioral Health Corpus</span></div>
+    <h2 class="chapter-heading">Clinical concept coverage and research capabilities.</h2>
+    <div class="chapter-body">
+      <h3>Conversation-to-note generation</h3>
+      <p>Pairing 1,850-word transcripts with signed 840-word notes across roughly three million sessions provides an input-and-output framework to automate chief complaints, histories, and plan assessments.</p>
+      <h3>Safety-critical evaluation</h3>
+      <p>Granular risk factors, protective factors, and suicide-risk determinations across millions of sessions support training and algorithmic evaluation of high-stakes clinical safety logic.</p>
+      <h3>Information structuring &amp; speech</h3>
+      <p>Sub-structured Mental Status Exam notes let models extract discrete psychiatric observations from conversational text, while 1.67 million hours of 16 kHz audio paired with speaker-labeled text support medical speech-to-text and diarization.</p>
+      <h3>Clinician-to-patient translation</h3>
+      <p>Aligned plan sections paired with plain-language after-visit summaries support translating complex terminology into readable, second-person care directives.</p>
+      <div class="chapter-takeaway">A multimodal foundation for documentation, safety, speech, and patient-communication research.</div>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <div class="part-banner">PART VII · Data Normalization</div>
+    <div class="chapter-header"><span class="chapter-eyebrow">Section 07</span><span class="chapter-folio">mdhub Behavioral Health Corpus</span></div>
+    <h2 class="chapter-heading">Multi-Setting Data Normalization Map.</h2>
+    <p class="chapter-framing">An independent secondary cross-walk for evaluating concept density, not a native component of the delivered dataset.</p>
+    <div class="chapter-visual">
+      <figure style="margin:0;padding:0;">
+        <svg viewBox="0 0 700 250" width="100%" xmlns="http://www.w3.org/2000/svg" font-family="JetBrains Mono, monospace">
+          <rect x="1" y="1" width="698" height="248" fill="none" stroke="#0E1620" stroke-width="1"></rect>
+          <text x="24" y="34" font-size="10" letter-spacing="1.5" fill="#5C7148">RAW INPUTS</text>
+          <rect x="24" y="48" width="170" height="34" fill="#F1EEE4" stroke="#0E1620" stroke-width="0.6"></rect><text x="34" y="69" font-size="11" fill="#0E1620">Audio · 16 kHz mono</text>
+          <rect x="24" y="92" width="170" height="34" fill="#F1EEE4" stroke="#0E1620" stroke-width="0.6"></rect><text x="34" y="113" font-size="11" fill="#0E1620">Turn-by-turn text</text>
+          <rect x="24" y="136" width="170" height="34" fill="#F1EEE4" stroke="#0E1620" stroke-width="0.6"></rect><text x="34" y="157" font-size="11" fill="#0E1620">Coded EHR fields</text>
+          <text x="270" y="34" font-size="10" letter-spacing="1.5" fill="#5C7148">DOCUMENTATION ENGINE</text>
+          <rect x="270" y="70" width="170" height="34" fill="#F1EEE4" stroke="#0E1620" stroke-width="0.6"></rect><text x="280" y="91" font-size="11" fill="#0E1620">Template SOAP / DAP</text>
+          <rect x="270" y="114" width="170" height="34" fill="#F1EEE4" stroke="#0E1620" stroke-width="0.6"></rect><text x="280" y="135" font-size="11" fill="#0E1620">MSE · Suicide Risk</text>
+          <text x="516" y="34" font-size="10" letter-spacing="1.5" fill="#5C7148">NORMALIZATION</text>
+          <rect x="516" y="60" width="160" height="30" fill="#FBFAF6" stroke="#0E1620" stroke-width="0.6"></rect><text x="526" y="79" font-size="10" fill="#0E1620">Condition → ICD-10</text>
+          <rect x="516" y="98" width="160" height="30" fill="#FBFAF6" stroke="#0E1620" stroke-width="0.6"></rect><text x="526" y="117" font-size="10" fill="#0E1620">Medication → RxNorm</text>
+          <rect x="516" y="136" width="160" height="42" fill="#5C7148" stroke="#0E1620" stroke-width="0.6"></rect><text x="526" y="153" font-size="10" fill="#FBFAF6">Pseudonymized</text><text x="526" y="167" font-size="10" fill="#FBFAF6">patient timeline</text>
+          <line x1="194" y1="110" x2="270" y2="110" stroke="#9AA3AE" stroke-width="0.8"></line>
+          <line x1="440" y1="120" x2="516" y2="120" stroke="#9AA3AE" stroke-width="0.8"></line>
+        </svg>
+      </figure>
+    </div>
+    <div class="chapter-body">
+      <p>Raw input paths resolve through the platform documentation engine, where transcript text maps into template-driven SOAP and DAP blocks generating Mental Status Exam and Suicide Risk Assessment outputs, into a normalization layer mapping Condition resources to ICD-10, MedicationStatement to RxNorm, and survey mentions to LOINC, all anchored on a single pseudonymized patient timeline.</p>
+    </div>
+  </section>
+
+</article>
+</body>
+</html>
